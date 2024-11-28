@@ -14,6 +14,8 @@ public class Main {
             System.out.println("Input a task to execute or \"end\" to exit:");
             String input = scanner.nextLine();
 
+            if (input.isBlank()) continue;
+
             if (input.equalsIgnoreCase("end")) {
                 worker.interrupt();
                 System.out.println("Bye bye");
