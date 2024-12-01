@@ -25,7 +25,12 @@ public class Main {
         for (Character c : charsFrequencies.keySet()) {
             codeTree.put(c, huffmanTree.getCharCode(c, ""));
         }
+
+        String encodedLine = Utils.encodeLineWithCodeTree(text, codeTree);
+        System.out.println(encodedLine);
+
+        String decodedLine = Utils.decodeHuffmansCode(encodedLine, huffmanTree);
+        System.out.println(decodedLine);
+
     }
-
-
 }

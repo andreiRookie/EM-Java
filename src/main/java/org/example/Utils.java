@@ -45,4 +45,27 @@ public class Utils {
         }
         return nodesList.get(0);
     }
+
+    public static String decodeHuffmansCode(String encodedLine, CharTreeNode tree) {
+        StringBuilder decodedLine = new StringBuilder();
+
+        CharTreeNode node = tree;
+        for (int i = 0; i < encodedLine.length(); i++) {
+            node = encodedLine.charAt(i) == '0' ? node.leftNode : node.rightNode;
+            if (node.character != null) {
+                decodedLine.append(node.character);
+                node = tree;
+            }
+        }
+        return decodedLine.toString();
+    }
+
+    public static String encodeLineWithCodeTree(String line, TreeMap<Character, String> codeTree) {
+        StringBuilder encodedLine = new StringBuilder();
+
+        for (int i = 0; i < line.length(); i++) {
+            encodedLine.append(codeTree.get(line.charAt(i)));
+        }
+        return encodedLine.toString();
+    }
 }
