@@ -15,7 +15,7 @@ public class WorkerThread extends Thread {
     @Override
     public void run() {
         try {
-            while (true) {
+            while (!isInterrupted()) {
                 if (linkedList.isEmpty()) {
                     sleep(500L);
                 } else {
@@ -24,6 +24,7 @@ public class WorkerThread extends Thread {
             }
         } catch (InterruptedException e) {
             System.out.println(name + " has been interrupted");
+            interrupt();
         }
         System.out.printf("%s finished", name);
     }
