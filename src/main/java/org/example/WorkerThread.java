@@ -6,7 +6,7 @@ public class WorkerThread extends Thread {
 
     private final String name;
 
-    private final LinkedList<Runnable> linkedList = new LinkedList<>();
+    private final Deque<Runnable> deque = new ArrayDeque<>();
 
     public WorkerThread(String name) {
         this.name = name;
@@ -16,10 +16,10 @@ public class WorkerThread extends Thread {
     public void run() {
         try {
             while (!isInterrupted()) {
-                if (linkedList.isEmpty()) {
+                if (deque.isEmpty()) {
                     sleep(500L);
                 } else {
-                    linkedList.poll().run();
+                    deque.poll().run();
                 }
             }
         } catch (InterruptedException e) {
@@ -30,6 +30,6 @@ public class WorkerThread extends Thread {
     }
 
     public void addTask(Runnable task) {
-        linkedList.offer(task);
+        deque.offer(task);
     }
 }
